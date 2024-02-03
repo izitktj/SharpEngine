@@ -24,9 +24,6 @@ public class Buffer
 
 	public void drawBuffer()
 	{
-		//Console.Clear();
-		//substituido pelo metodo abaixo (diminuiu o frametime)
-
 		Console.SetCursorPosition(0, 0);
 
 		StringBuilder screen = new StringBuilder("");
@@ -37,6 +34,8 @@ public class Buffer
 		    {
 		    	screen.Append(buffer[j, i]);
 		    }
+
+		    screen.Append("\n");
 		}
 
 		// using (Stream stdout = Console.OpenStandardOutput(cols * rows))
@@ -50,13 +49,14 @@ public class Buffer
 
 	public void clear()
 	{
-		for (int i = 0; i < LimitY; i++)
-		{
-		    for (int j = 0; j < LimitX; j++)
-		    {
-		        buffer[j, i] = ' ';
-		    }
-		}
+		// for (int i = 0; i < LimitY; i++)
+		// {
+		//     for (int j = 0; j < LimitX; j++)
+		//     {
+		//         buffer[j, i] = ' ';
+		//     }
+		// }
+		Array.Clear(buffer);
 	}
 
 	public void updateText(string _text, int _x = 0, int _y = 0)
