@@ -5,27 +5,19 @@ internal class Program
 {
     static void Main(string[] args)
 	{
-        int Width = Console.WindowWidth / 2;
-        int Height = Console.WindowHeight / 2;
-
-        Buffer bffr = new Buffer(Width, Height);
+        Buffer bffr = new Buffer(Console.WindowWidth / 2, Console.WindowHeight / 2);
         TimeEngine TimeE = new TimeEngine();
 
         while (true) {
-            bffr.clear();
-
             bffr.updateText("Delta time:", 0, 2);
 
             bffr.updateText(Convert.ToString(TimeE.deltaTime), 0, 3);
 
             bffr.drawBuffer();
 
-            //if (Console.WindowWidth != Width || Console.WindowHeight != Height) {
-            //    Width = Console.WindowWidth;
-            //    Height = Console.WindowHeight;
+            bffr.clear();
 
-            //    bffr.changeBufferLimit(Width, Height);
-            //}
+            bffr.changeResolution();
 
             TimeE.calculeDeltaTime();
         }

@@ -49,13 +49,6 @@ public class Buffer
 
 	public void clear()
 	{
-		// for (int i = 0; i < LimitY; i++)
-		// {
-		//     for (int j = 0; j < LimitX; j++)
-		//     {
-		//         buffer[j, i] = ' ';
-		//     }
-		// }
 		Array.Clear(buffer);
 	}
 
@@ -75,5 +68,19 @@ public class Buffer
 		buffer = new char[_limitX, _limitY];
 
 		Console.Clear();
+	}
+
+	public void changeResolution()
+	{
+		int Width = Console.WindowWidth / 2;
+		int Height = Console.WindowHeight / 2;
+
+		if (Console.WindowWidth / 2 != Width || Console.WindowHeight / 2 != Height) 
+		{
+               Width = Console.WindowWidth / 2;
+               Height = Console.WindowHeight / 2;
+
+               changeBufferLimit(Width, Height);
+        }
 	}
 }
