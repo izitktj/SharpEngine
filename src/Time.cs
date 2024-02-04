@@ -1,10 +1,8 @@
 using System;
-using System.Diagnostics;
-using System.Threading;
 
 namespace SharpEngine;
 
-public class TimeEngine
+public class Time
 {
 	public double deltaTime {get; private set;}
 

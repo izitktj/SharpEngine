@@ -2,17 +2,17 @@ using System;
 
 namespace SharpEngine;
 
-public class Pchar
+public class GameObject
 {
 	public int X {get; private set;}
 	public int Y {get; private set;}
-	public char Schar {get; private set;}
+	public char Char {get; private set;}
 
-	public Pchar(char _pChar, int _x = 0, int _y = 0)
+	public GameObject(char _char, int _x = 0, int _y = 0)
 	{
 		X = _x;
 		Y = _y;
-		Schar = _pChar;
+		Char = _char;
 	}
 
 	public void position(int _x, int _y)
@@ -21,8 +21,8 @@ public class Pchar
 		Y = _y;
 	}
 
-	public void changePchar(char _pChar)
+	public void changeChar(char _char)
 	{
-		Schar = _pChar;
+		Char = _char;
 	}
 }
