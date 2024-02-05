@@ -40,13 +40,12 @@ public class Buffer
 		    screen.Append("\n");
 		}
 
-		// using (Stream stdout = Console.OpenStandardOutput(cols * rows))
-		// {
-		//     stdout.Write(buffer, 0, buffer.Length);
-		// } 
-		//nao sei como usar por isso comentei, irei pesquisar dps
+		var _buffer = Encoding.UTF8.GetBytes(screen.ToString());
 
-		Console.Write(screen.ToString());
+		using (Stream stdout = Console.OpenStandardOutput())
+		{
+		    stdout.Write(_buffer, 0, _buffer.Length);
+		}
 	}
 
 	public void clear()
