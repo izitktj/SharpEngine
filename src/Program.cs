@@ -21,7 +21,8 @@ internal class Program
 
             bffr.clear();
 
-            bffr.changeResolution();
+            //bffr.changeResolution();
+            //sorry, not working
 
             Time.calculeDeltaTime();
         }
@@ -31,11 +32,13 @@ internal class Program
     {
     	char[] map =
     	{
-    		'0', '0', '0', '0', '¨',
-    		'0', '0', '0', '0', '¨', 
-    		'1', '2', '0', '0', '¨', 
+    		'0', '0', '0', '0',
+    		'0', '0', '0', '0', 
+    		'1', '2', '0', '0', 
     		'0', '1', '2', '0'
     	};
+
+        _bffr.updateQuad(map, 9, 9, 13, 13);
 
     	_bffr.updateChar(_player.Char, Math.Clamp(_player.X, 0, _bffr.LimitX - 1), Math.Clamp(_player.Y, 0, _bffr.LimitY - 1));
 
@@ -50,8 +53,5 @@ internal class Program
         _bffr.updateText("BX: " + Convert.ToString(_bffr.LimitX), 0, 6);
 
         _bffr.updateText("BY: " + Convert.ToString(_bffr.LimitY), 0, 7);
-
-        _bffr.updateQuad(map, 9, 9);
-
     }
 }

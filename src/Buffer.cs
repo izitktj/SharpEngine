@@ -61,23 +61,23 @@ public class Buffer
 		}
 	}
 
-	public void updateQuad(char[] _quad, int _x, int _y)
+	public void updateQuad(char[] _quad, int _x, int _y, int _limitX, int _limitY)
 	{
 		int y = _y;
 		int x = _x;
 
 		for(int i = 0; i < _quad.Length; i++)
 		{
-			if(_quad[i] == '¨')
+			updateChar(_quad[i], x, y);
+
+			if(x + 1 != _limitX)
 			{
-				y += 1;
-				x = _x;
+				x += 1;
 			}
 			else
 			{
-				updateChar(_quad[i], x, y);
-
-				x += 1;
+				y += 1;
+				x = _x;
 			}
 		}
 	}
