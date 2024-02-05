@@ -9,6 +9,8 @@ public class Buffer
 	public int LimitX {get; private set;}
 	public int LimitY {get; private set;}
 
+	MathE MathE = new MathE();
+
 	public Buffer(int _limitX, int _limitY)
 	{
 		LimitX = _limitX;
@@ -17,9 +19,9 @@ public class Buffer
 		buffer = new char[_limitX, _limitY];
 	}
 
-	public void updateChar(char _char, int _x, int _y)
+	public void updateChar(char _char, double _x, double _y)
 	{
-		buffer[_x, _y] = _char;
+		buffer[MathE.RoundToInt(_x), MathE.RoundToInt(_y)] = _char;
 	}
 
 	public void drawBuffer()
@@ -60,6 +62,27 @@ public class Buffer
 		}
 	}
 
+	public void updateQuad(char[] _quad, int _x, int _y)
+	{
+		int y = _y;
+		int x = _x;
+
+		for(int i = 0; i < _quad.Length; i++)
+		{
+			if(_quad[i] == '¨')
+			{
+				y += 1;
+				x = _x;
+			}
+			else
+			{
+				updateChar(_quad[i], x, y);
+
+				x += 1;
+			}
+		}
+	}
+
 	public void changeBufferLimit(int _limitX, int _limitY)
 	{
 		LimitX = _limitX;
@@ -67,20 +90,21 @@ public class Buffer
 
 		buffer = new char[_limitX, _limitY];
 
-		Console.Clear();
+		Console.SetCursorPosition(0, 0);
 	}
 
 	public void changeResolution()
 	{
-		int Width = Console.WindowWidth / 2;
-		int Height = Console.WindowHeight / 2;
+		int Width = Console.WindowWidth - 1;
+		int Height = Console.WindowHeight - 1;
 
-		if (Console.WindowWidth / 2 != Width || Console.WindowHeight / 2 != Height) 
-		{
-               Width = Console.WindowWidth / 2;
-               Height = Console.WindowHeight / 2;
+		if (Console.WindowWidth - 1 == Width || Console.WindowHeight - 1 == Height) return;
 
-               changeBufferLimit(Width, Height);
-        }
+   		Width = Console.WindowWidth - 1;
+   		Height = Console.WindowHeight - 1;
+
+   		changeBufferLimit(Width, Height);
+
+   		updateText("Changed reso", 3, LimitY - 10);
 	}
 }
