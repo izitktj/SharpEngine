@@ -10,31 +10,14 @@ public class InputManager
 
 	public void KeyManagment()
 	{
-		while(true)
-    	{
-    		if(Console.KeyAvailable == false)
-    		{
-    			ConsoleKeyInfo input = Console.ReadKey(true);
+		if(Console.KeyAvailable == true)
+		{
+			ConsoleKeyInfo input = Console.ReadKey(true);
 
-				if(KeyPressed != null)
-				{
-					KeyPressed(input);
-				}
-    		}
-    	}
-
-		// Task.Factory.StartNew(
-        //     () => {
-        //     	while(true)
-        //     	{
-        //     		if(Console.KeyAvailable == false) return;
-		// 			ConsoleKeyInfo input = Console.ReadKey(true);
-
-		// 			if(KeyPressed != null)
-		// 			{
-		// 				KeyPressed(input);
-		// 			}
-        //     	}
-        //     });
+			if(KeyPressed != null)
+			{
+				KeyPressed(input);
+			}
+		}
 	}
 }

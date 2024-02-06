@@ -7,13 +7,7 @@ internal class Program
     static void Main(string[] args)
 	{
         Program Program = new Program();
-        EventManager EventManager = new EventManager();
-        InputManager InputManager = new InputManager();
-
-        var task = Task.Run(new Action(InputManager.KeyManagment));
-
-        EventManager.SubscribeEvents();
-        // InputManager.KeyManagment();
+        
         Program.MainLoop();
     }
 
@@ -21,12 +15,18 @@ internal class Program
     {
         Buffer bffr = new Buffer(Console.WindowWidth - 1, Console.WindowHeight - 1);
         Time Time = new Time();
-        GameObject player = new GameObject('#', 10, 10);
-        Player Player = new Player();
+        EventManager EventManager = new EventManager();
+        InputManager InputManager = new InputManager();
+        GameObject player = new GameObject('#', 16, 16);
+        Player Player = new Player(player, 1);
+
+        EventManager.SubscribeEvents(Player);
 
         while (true) {
 
-            Player.MovementManager(player, 1, Time, bffr);
+            //Player.MovementManager();
+
+            InputManager.KeyManagment();
 
             Draw(bffr, player, Time);
 
@@ -43,7 +43,7 @@ internal class Program
 
     static void Draw(Buffer _bffr, GameObject _player, Time _time)
     {
-        Raycaster ryc = new Raycaster();
+        Raycaster ryc = new Raycaster(_player);
 
         _bffr.updateQuad(ryc.MapChar, 15, 15, 23, 23);
 
@@ -60,10 +60,5 @@ internal class Program
         _bffr.updateText("BX: " + Convert.ToString(_bffr.LimitX), 0, 6);
 
         _bffr.updateText("BY: " + Convert.ToString(_bffr.LimitY), 0, 7);
-    }
-
-    public void OnKeyPressed(ConsoleKeyInfo _key)
-    {
-        System.Environment.Exit(1);
     }
 }

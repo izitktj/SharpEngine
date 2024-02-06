@@ -38,15 +38,12 @@ public class Raycaster
 		'0', '0', '0', '0', '0', '0', '0', '0'
 	};
 
-	public Raycaster()
+	public Raycaster(GameObject _player)
 	{
 		MapX = 8;
 		MapY = 8;
 		MapS = 64;
-	}
 
-	public void AssignPlayer(GameObject _player)
-	{
 		Player = _player;
 	}
 }
