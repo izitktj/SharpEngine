@@ -482,3 +482,7 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+#Sublime text files
+*.sublime-project
+*.sublime-workspace
