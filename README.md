@@ -1,5 +1,5 @@
 # SharpEngine
 Terminal C# engine (Development)
 
-#WARNING
-##Don't use raster font in comand prompt, is slow as fuc*
+# WARNING
+## Try diferent fonts, for me, rastering font is slow as fuc*
