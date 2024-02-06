@@ -4,9 +4,7 @@ namespace SharpEngine;
 
 public class EventManager
 {
-	InputManager InputManager = new InputManager();
-
-	public void SubscribeEvents(Player Player)
+	public void SubscribeEvents(Player Player, InputManager InputManager)
 	{
 		InputManager.KeyPressed += Player.OnKeyPressed;
 	}

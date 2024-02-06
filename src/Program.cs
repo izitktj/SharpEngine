@@ -20,7 +20,7 @@ internal class Program
         GameObject player = new GameObject('#', 16, 16);
         Player Player = new Player(player, 1);
 
-        EventManager.SubscribeEvents(Player);
+        EventManager.SubscribeEvents(Player, InputManager);
 
         while (true) {
 

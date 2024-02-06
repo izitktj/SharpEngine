@@ -55,8 +55,6 @@ public class Player
 
     public void OnKeyPressed(ConsoleKeyInfo input)
     {
-    	Thread.Sleep(5000);
-
     	InputSide Out = new InputSide(0,0);
 
     	switch(input.Key)
