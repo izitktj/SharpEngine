@@ -4,10 +4,24 @@ namespace SharpEngine;
 
 public class Player
 {
-    InputSide InputManagment()
-    {
-    	ConsoleKeyInfo input = Console.ReadKey(true);
+	GameObject GOPlayer = new GameObject(' ');
+	int Velocity = 1;
 
+	public Player(GameObject _player = null, int _velocity = 1)
+	{
+		GOPlayer = _player;
+		Velocity = _velocity;
+	}
+
+    public void MovementManager(InputSide Side)
+    {
+    	GOPlayer.position(GOPlayer.X, Convert.ToDouble(GOPlayer.Y + Side.Vertical * Velocity));
+
+    	GOPlayer.position(Convert.ToDouble(GOPlayer.X + Side.Horizontal * Velocity) , GOPlayer.Y);
+    }
+
+    public void OnKeyPressed(ConsoleKeyInfo input)
+    {
     	InputSide Out = new InputSide(0,0);
 
     	switch(input.Key)
@@ -34,18 +48,7 @@ public class Player
     	    break;
     	}
 
-    	return Out;
-    } 
-
-    public void MovementManager(GameObject _player, int _velocity, Time _time, Buffer _bffr)
-    {
-    	if(Console.KeyAvailable == false) return;
-
-    	InputSide Side = InputManagment();
-
-    	_player.position(_player.X, Math.Clamp(Convert.ToDouble(_player.Y + Side.Vertical * _velocity), 0, _bffr.LimitY));
-
-    	_player.position(Math.Clamp(Convert.ToDouble(_player.X + Side.Horizontal * _velocity), 0, _bffr.LimitX) , _player.Y);
+    	MovementManager(Out);
     }
 }
 
