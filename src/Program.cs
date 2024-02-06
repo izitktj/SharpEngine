@@ -6,6 +6,19 @@ internal class Program
 
     static void Main(string[] args)
 	{
+        Program Program = new Program();
+        EventManager EventManager = new EventManager();
+        InputManager InputManager = new InputManager();
+
+        var task = Task.Run(new Action(InputManager.KeyManagment));
+
+        EventManager.SubscribeEvents();
+        // InputManager.KeyManagment();
+        Program.MainLoop();
+    }
+
+    public void MainLoop()
+    {
         Buffer bffr = new Buffer(Console.WindowWidth - 1, Console.WindowHeight - 1);
         Time Time = new Time();
         GameObject player = new GameObject('#', 10, 10);
@@ -13,9 +26,9 @@ internal class Program
 
         while (true) {
 
-        	Player.MovementManager(player, 1, Time, bffr);
+            Player.MovementManager(player, 1, Time, bffr);
 
-        	Draw(bffr, player, Time);
+            Draw(bffr, player, Time);
 
             bffr.drawBuffer();
 
@@ -25,20 +38,14 @@ internal class Program
             //sorry, not working
 
             Time.calculeDeltaTime();
-        }
+        } 
     }
 
     static void Draw(Buffer _bffr, GameObject _player, Time _time)
     {
-    	char[] map =
-    	{
-    		'0', '0', '0', '0',
-    		'0', '0', '0', '0', 
-    		'1', '2', '0', '0', 
-    		'0', '1', '2', '0'
-    	};
+        Raycaster ryc = new Raycaster();
 
-        _bffr.updateQuad(map, 9, 9, 13, 13);
+        _bffr.updateQuad(ryc.MapChar, 15, 15, 23, 23);
 
     	_bffr.updateChar(_player.Char, Math.Clamp(_player.X, 0, _bffr.LimitX - 1), Math.Clamp(_player.Y, 0, _bffr.LimitY - 1));
 
@@ -53,5 +60,10 @@ internal class Program
         _bffr.updateText("BX: " + Convert.ToString(_bffr.LimitX), 0, 6);
 
         _bffr.updateText("BY: " + Convert.ToString(_bffr.LimitY), 0, 7);
+    }
+
+    public void OnKeyPressed(ConsoleKeyInfo _key)
+    {
+        System.Environment.Exit(1);
     }
 }

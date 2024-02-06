@@ -47,6 +47,11 @@ public class Player
 
     	_player.position(Math.Clamp(Convert.ToDouble(_player.X + Side.Horizontal * _velocity), 0, _bffr.LimitX) , _player.Y);
     }
+
+    public void OnKeyPressed(ConsoleKeyInfo _key)
+    {
+        System.Environment.Exit(1);
+    }
 }
 
 
