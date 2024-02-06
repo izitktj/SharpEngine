@@ -13,51 +13,50 @@ internal class Program
 
     public void MainLoop()
     {
-        Buffer bffr = new Buffer(Console.WindowWidth - 1, Console.WindowHeight - 1);
         EventManager EventManager = new EventManager();
         InputManager InputManager = new InputManager();
         GameObject player = new GameObject('#', 16, 16);
         Player Player = new Player(player, 1);
 
         EventManager.SubscribeEvents(Player, InputManager);
+        Buffer.changeBufferLimit(Console.WindowWidth - 1, Console.WindowHeight - 1);
+        // Buffer.changeResolution();
 
-        while (true) {
-
-            //Player.MovementManager();
-
+        while (true)
+        {
             InputManager.KeyManagment();
 
-            Draw(bffr, player);
+            Draw(player);
 
-            bffr.drawBuffer();
+            Buffer.drawBuffer();
 
-            bffr.clear();
+            Buffer.clear();
 
-            //bffr.changeResolution();
+            //Buffer.changeResolution();
             //sorry, not working
 
             Time.calculeDeltaTime();
         } 
     }
 
-    static void Draw(Buffer _bffr, GameObject _player)
+    static void Draw(GameObject _player)
     {
         Raycaster ryc = new Raycaster(_player);
 
-        _bffr.updateQuad(ryc.MapChar, 15, 15, 23, 23);
+        Buffer.updateQuad(ryc.MapChar, 15, 15, 23, 23);
 
-    	_bffr.updateChar(_player.Char, Math.Clamp(_player.X, 0, _bffr.LimitX - 1), Math.Clamp(_player.Y, 0, _bffr.LimitY - 1));
+    	Buffer.updateChar(_player.Char, Math.Clamp(_player.X, 0, Buffer.LimitX - 1), Math.Clamp(_player.Y, 0, Buffer.LimitY - 1));
 
-        _bffr.updateText("Delta time:", 0, 2);
+        Buffer.updateText("Delta time:", 0, 2);
 
-        _bffr.updateText(Convert.ToString(Time.deltaTime), 0, 3);
+        Buffer.updateText(Convert.ToString(Time.deltaTime), 0, 3);
 
-        _bffr.updateText("PX: " + Convert.ToString(_player.X), 0, 4);
+        Buffer.updateText("PX: " + Convert.ToString(_player.X), 0, 4);
 
-        _bffr.updateText("PY: " + Convert.ToString(_player.Y), 0, 5);
+        Buffer.updateText("PY: " + Convert.ToString(_player.Y), 0, 5);
 
-        _bffr.updateText("BX: " + Convert.ToString(_bffr.LimitX), 0, 6);
+        Buffer.updateText("BX: " + Convert.ToString(Buffer.LimitX), 0, 6);
 
-        _bffr.updateText("BY: " + Convert.ToString(_bffr.LimitY), 0, 7);
+        Buffer.updateText("BY: " + Convert.ToString(Buffer.LimitY), 0, 7);
     }
 }
