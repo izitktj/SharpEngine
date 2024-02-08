@@ -6,7 +6,7 @@ internal class Program
 
     static void Main(string[] args)
 	{
-        Buffer.changeBufferLimit(Console.WindowWidth - 1, Console.WindowHeight - 1);
+        Buffer.changeBufferLimit(Console.WindowWidth - 1, Console.WindowHeight - 1); //-1 is needed for prevent stuterings
 
         while (true) 
         {
@@ -14,7 +14,7 @@ internal class Program
 
             Buffer.drawBuffer();
 
-            Buffer.clear();
+            Buffer.Clear();
 
             Time.calculeDeltaTime();
         } 
