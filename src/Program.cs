@@ -6,11 +6,11 @@ internal class Program
 
     static void Main(string[] args)
 	{
-        Buffer Buffer = new Buffer(Console.WindowWidth - 1, Console.WindowHeight - 1);
+        Buffer.changeBufferLimit(Console.WindowWidth - 1, Console.WindowHeight - 1);
 
         while (true) 
         {
-            Draw(Buffer);
+            Draw();
 
             Buffer.drawBuffer();
 
@@ -20,10 +20,10 @@ internal class Program
         } 
     }
 
-    static void Draw(Buffer _bffr)
+    static void Draw()
     {
-        _bffr.updateText("Delta time:", 0, 1);
+        Buffer.updateText("Delta time:", 0, 1);
 
-        _bffr.updateText(Convert.ToString(Time.deltaTime), 0, 2);
+        Buffer.updateText(Convert.ToString(Time.deltaTime), 0, 2);
     }
 }
