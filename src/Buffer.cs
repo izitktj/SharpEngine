@@ -17,27 +17,26 @@ public static class Buffer
 		Console.SetCursorPosition(0, 0);
 
 								  //Part 1       -  Part 2
-		byte[] _buffer = new byte[LimitX * LimitY + (LimitY * 2)];
+		byte[] _buffer = new byte[LimitX * LimitY + (LimitY /** 2*/)];
 
 		//Convert 2D array navigation to a 1D array navigation
-		int total = 0;
+		int total = -1; //for start in 0 i put this -1
 
 		for (int i = 0; i < LimitY; i++)
 		{
 		    for (int j = 0; j < LimitX; j++)
 		    {
 		    	//This uses part 1
-		    	_buffer[total] = Convert.ToByte(buffer[j, i]);
 		    	total++;
+		    	_buffer[total] = Convert.ToByte(buffer[j, i]);
 		    }
 
 		    //This uses Part 2
-		    _buffer[total + 1] = Convert.ToByte('\n');
-		    total += 2;
-
+		    total++;
+		    _buffer[total] = Convert.ToByte('\n');
 		}
 
-		using (Stream stdout = Console.OpenStandardOutput(_buffer.Length))
+		using (Stream stdout = Console.OpenStandardOutput(/*_buffer.Length*/))
 		{
 			//Prints all
 		    stdout.Write(_buffer, 0, _buffer.Length);
@@ -74,9 +73,9 @@ public static class Buffer
 	*/
 	public static void updateText(string _text, int _x = 0, int _y = 0)
 	{
-		for(int i = 0; i < _text.Length; i++)
+		for(int i = _x; i < _text.Length; i++)
 		{
-			updateChar(_text[i], i += _x, _y);
+			updateChar(_text[i],i , _y);
 		}
 	}
 
@@ -87,11 +86,11 @@ public static class Buffer
 	Ex:
 	char[] beatyQuad = 
 	{
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0
-	}
+		'0', '0', '0', '0',
+    	'0', '0', '0', '0',
+    	'0', '0', '0', '0',
+    	'0', '0', '0', '0'
+	};
 
 	Buffer.updateQuad(beatyQuad, 5, 5, 9, 9);
 	*/
