@@ -5,7 +5,7 @@ namespace SharpEngine;
 
 public static class Buffer
 {
-	public static char[,] buffer {get; private set;}
+	public static char[,] buffer {get; private set;} = new char[50,50];
 	public static int LimitX {get; private set;}
 	public static int LimitY {get; private set;}
 
@@ -20,7 +20,7 @@ public static class Buffer
 		byte[] _buffer = new byte[LimitX * LimitY + (LimitY /** 2*/)];
 
 		//Convert 2D array navigation to a 1D array navigation
-		int total = -1; //for start in 0 i put this -1
+		int total = -1; //for start in 0 put -1
 
 		for (int i = 0; i < LimitY; i++)
 		{
@@ -38,7 +38,6 @@ public static class Buffer
 
 		using (Stream stdout = Console.OpenStandardOutput(/*_buffer.Length*/))
 		{
-			//Prints all
 		    stdout.Write(_buffer, 0, _buffer.Length);
 		}
 	}
@@ -61,6 +60,7 @@ public static class Buffer
 	*/
 	public static void updateChar(char _char, int _x, int _y)
 	{
+		if(_x >= LimitX || _y >= LimitY) return;
 		buffer[_x, _y] = _char;
 	}
 
@@ -115,6 +115,36 @@ public static class Buffer
 				x = _x;	//next line
 			}
 		}
+	}
+
+
+	/*
+	Algorithmn by: https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+
+	Drawns a line on buffer[,] array
+
+	Ex:
+	Buffer.updateLine('@', 20, 10, 40, 60);
+	*/
+	public static void updateLine(char _char, int _x0, int _y0, int _x1, int _y1)
+	{
+		int dx = _x1 - _x0;
+	    int dy = _y1 - _y0;
+	    int D = 2 * dy - dx;
+	    int y = _y0;
+
+	    for(int x = _x0; x < _x1; x++)
+	    {
+	    	updateChar(_char, x, y);
+
+	    	if(D > 0)
+	    	{
+	    		y++;
+            	D -= 2 * dx;
+	    	}
+
+	    	D += 2*dy;
+	    }
 	}
 
 	public static void changeBufferLimit(int _limitX, int _limitY)
